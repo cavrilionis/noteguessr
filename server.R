@@ -1,47 +1,115 @@
 
+
 server <- function(input, output, session) {
+  # Initialize reactive values
+  correct_count <- reactiveVal(0)
+  total_count <- reactiveVal(0)
+  generated_note <- reactiveVal()
   
-  reactive_note <- reactiveVal()
+  # Notes list
+  notes <- c(
+    "E2",
+    "F2",
+    "G2",
+    "A2",
+    "B2",
+    "C3",
+    "D3",
+    "E3",
+    "F3",
+    "G3",
+    "A3",
+    "B3",
+    "C4",
+    "D4",
+    "E4",
+    "F4",
+    "G4"
+  )
   
-  observeEvent(NULL, {
-    generate_note()
-  }, once = TRUE)
-  
-  generate_note <- function() {
-    note_names <- c("C3", "D3", "E3", "F3", "G3", "A3", "B3", "C4")
-    random_note <- sample(note_names, 1)
-    reactive_note(random_note)
-    
-    output$staff <- renderPlot({
-      gm(
-        list(
-          clef = "bass",
-          time_signature = "4/4",
-          note(random_note, duration = 1)
-        )
-      )
-    })
-    
-    invalidateLater(10000, session)
-    observeEvent(invalidateLater(10000, session),{
-      showModal(modalDialog(
-        title = "Time's up!",
-        "Time is up! Please press refresh to play again.",
-        easyClose = TRUE,
-        footer = NULL
-      ))
-      disable("submit")
-    }, ignoreNULL = FALSE, once = TRUE)
+  # Function to generate music notation image
+  generate_music_image <- function(note) {
+    # Ensure the required library is loaded
+    music <- Music() +
+      Line(pitches = c(note), durations = c(4)) +
+      Meter(4, 4, invisible = TRUE) +
+      Clef("F")
+    export(music, "www/score.png")
   }
   
+  # Initialize the first random note and generate image
+  observe({
+    initial_note <- sample(notes, 1)
+    generated_note(initial_note)
+    generate_music_image(initial_note)
+  })
+  
+  # Display the current image
+  output$noteImage <- renderImage({
+    list(src = "www/score.png", alt = "Musical Score")
+  }, deleteFile = FALSE)
+  
+  # Submit guess and evaluate
   observeEvent(input$submit, {
-    guessed_note <- input$guess
-    correct_note <- reactive_note()
+    req(input$guess)
+    req(input$numNotes)
     
-    if (guessed_note == correct_note) {
+    # Evaluate the guess
+    correct_note <- substr(generated_note(), 1, 1) # Extract note name
+    if (input$guess == correct_note) {
+      correct_count(correct_count() + 1)
       output$result <- renderText("Correct!")
     } else {
-      output$result <- renderText(paste("Incorrect. The correct note was:", correct_note))
+      output$result <- renderText(paste("Incorrect! The correct note was", correct_note))
     }
+    
+    total_count(total_count() + 1)
+    
+    # Clear the radio button selection
+    updateRadioButtons(session, "guess", selected = character(0))
+    
+    # Check if the game is over
+    if (total_count() >= input$numNotes) {
+      output$result <- renderText("Game Over!")
+      shinyjs::disable("submit")
+    } else {
+      # Generate a new random note and image
+      new_note <- sample(notes, 1)
+      generated_note(new_note)
+      generate_music_image(new_note)
+      
+      # Display the current image
+      output$noteImage <- renderImage({
+        list(src = "www/score.png", alt = "Musical Score")
+      }, deleteFile = FALSE)
+    }
+    
+    # Display the percentage of correct guesses
+    output$percentage <- renderText({
+      if (total_count() > 0) {
+        percentage <- (correct_count() / total_count()) * 100
+        paste("Percentage of correct guesses:",
+              round(percentage, 2),
+              "%")
+      } else {
+        "Percentage of correct guesses: 0%"
+      }
+    })
+  })
+  
+  # Reset game when "Restart" is clicked
+  observeEvent(input$restart, {
+    correct_count(0)
+    total_count(0)
+    new_note <- sample(notes, 1)
+    generated_note(new_note)
+    generate_music_image(new_note)
+    updateRadioButtons(session, "guess", selected = character(0))
+    output$result <- renderText("")
+    shinyjs::enable("submit")
+    # Display the current image
+    output$noteImage <- renderImage({
+      list(src = "www/score.png", alt = "Musical Score")
+    }, deleteFile = FALSE)
   })
 }
