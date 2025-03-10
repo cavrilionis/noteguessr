@@ -1,2 +1,5 @@
 library(shiny)
 library(gm)
+library(shinythemes)
+library(dplyr)
+library(shinyjs)
