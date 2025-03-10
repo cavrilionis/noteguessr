@@ -1,5 +1,5 @@
 library(shiny)
-library(gm)
+suppressPackageStartupMessages(library(gm))
 library(shinythemes)
-library(dplyr)
-library(shinyjs)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(shinyjs))
