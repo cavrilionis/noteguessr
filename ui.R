@@ -1,11 +1,22 @@
 
-ui <- fluidPage(
-  titlePanel("Note Guessing Game"),
-  mainPanel(
-    plotOutput("staff", width = "80%", height = "200px"),
-    selectInput("guess", "Guess the Note:",
-                choices = c("C3", "D3", "E3", "F3", "G3", "A3", "B3", "C4")),
-    actionButton("submit", "Submit Guess"),
-    textOutput("result")
+fluidPage(
+  useShinyjs(),
+  theme = shinythemes::shinytheme("yeti"),
+  titlePanel("NoteGuessR"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("numNotes", "Number of Notes to Guess:", min = 5, max = 30, value = 5),
+      radioButtons("guess", "Your Guess (Note Name):", 
+                   choices = c("C", "D", "E", "F", "G", "A", "B"), 
+                   selected = character(0)),
+      actionButton("submit", "Submit"),
+      actionButton("restart", "Restart")
+    ),
+    mainPanel(
+      imageOutput("noteImage"),
+      textOutput("result"),
+      textOutput("percentage"),
+      uiOutput("startButton")
+    )
   )
 )
