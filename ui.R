@@ -22,9 +22,18 @@ fluidPage(
       actionButton("restart", "Restart")
     ),
     mainPanel(
-      imageOutput("noteImage"),
-      textOutput("result"),
-      textOutput("percentage"),
+      tags$div(
+        style = "display: flex; flex-direction: column; align-items: left;",
+        tags$div(
+          style = "max-height: 150px; overflow: hidden;", # Adjust max-height as needed
+          imageOutput("noteImage")
+        ),
+        tags$div(
+          style = "margin-top: 5px; margin-bottom: 0px;",
+          textOutput("result"),
+          textOutput("percentage")
+        )
+      )
     )
   )
 )
