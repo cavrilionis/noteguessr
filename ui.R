@@ -5,10 +5,19 @@ fluidPage(
   titlePanel("NoteGuessR"),
   sidebarLayout(
     sidebarPanel(
-      sliderInput("numNotes", "Number of Notes to Guess:", min = 5, max = 30, value = 5),
-      radioButtons("guess", "Your Guess (Note Name):", 
-                   choices = c("C", "D", "E", "F", "G", "A", "B"), 
-                   selected = character(0)),
+      sliderInput(
+        "numNotes",
+        "Number of Notes to Guess:",
+        min = 5,
+        max = 30,
+        value = 5
+      ),
+      radioButtons(
+        "guess",
+        "Guess the Note:",
+        choices = c("C", "D", "E", "F", "G", "A", "B"),
+        selected = character(0)
+      ),
       actionButton("submit", "Submit"),
       actionButton("restart", "Restart")
     ),
@@ -16,7 +25,6 @@ fluidPage(
       imageOutput("noteImage"),
       textOutput("result"),
       textOutput("percentage"),
-      uiOutput("startButton")
     )
   )
 )
