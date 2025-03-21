@@ -23,7 +23,7 @@ Please provide as much detail as possible, including:
 
 ## Vulnerability Disclosure Process
 
-1.  **Receipt:** We will acknowledge receipt of your vulnerability report within \[Number] business days.
+1.  **Receipt:** We will acknowledge receipt of your vulnerability report within 2 business days.
 2.  **Investigation:** We will investigate the reported vulnerability and determine its impact.
 3.  **Fix:** If the vulnerability is confirmed, we will develop and release a patch as quickly as possible.
 4.  **Disclosure:** Once a patch is released, we will publicly disclose the vulnerability and credit you for the report (if you choose to be credited).
