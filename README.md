@@ -2,12 +2,13 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) 
 [![ShinyApps.io](https://img.shields.io/badge/shinyapps.io-deployed-brightgreen.svg)](https://christos.shinyapps.io/noteguessr/)
-[![Deploy Status](https://img.shields.io/badge/Render-Deployed-0099cc?style=flat&logo=render)](https://noteguessr.onrender.com)
+[![Deploy Status](https://img.shields.io/badge/Render-deployed-brightgreen?style=flat&logo=render)](https://noteguessr.onrender.com)
 ![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
 ![R](https://img.shields.io/badge/Language-R-276DC3?style=flat&logo=r)
 ![Shiny](https://img.shields.io/badge/Framework-Shiny-7F7FFF?style=flat&logo=Rstudio)
-![Docker](https://img.shields.io/badge/Container-Docker-2496ED?style=flat&logo=docker)
-![Code Style](https://img.shields.io/badge/code%20style-tidyverse-7E234D.svg)
+![Docker](https://img.shields.io/badge/Container-Docker-2496ED?logo=docker)
+![Code Style](https://img.shields.io/badge/Code%20style-tidyverse-7E234D.svg)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/cavrilionis/noteguessr?logo=GitHub)
 
 This repository contains the code for the [NoteGuessR](https://christos.shinyapps.io/noteguessr/) web application, a tool designed to help musicians practice note recognition in the bass clef.
 
@@ -41,14 +42,14 @@ If you'd like to run NoteGuessR locally, follow these steps:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/cavrilionis/noteguessr.git](https://www.google.com/search?q=https://github.com/cavrilionis/noteguessr.git)
+    git clone https://github.com/cavrilionis/noteguessr.git
     cd noteguessr
     ```
 2.  **Install R and necessary packages:**
     * Ensure you have R installed on your system.
     * Open R and install the required packages:
         ```R
-        install.packages(c("shiny"))
+        install.packages(c("shiny", "shinythemes", "shinyjs", "dplyr"))
         ```
 3.  **Run the application:**
     ```R
@@ -78,10 +79,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Future Enhancements:**
 
-* [ ] Treble clef support.
-* [ ] Timer/score tracking.
-* [ ] Customizable note ranges.
-* [ ] More interactive feedback.
-* [ ] Mobile responsiveness.
+* Treble clef support.
+* Timer/score tracking.
+* Customizable note ranges.
+* More interactive feedback.
+* Mobile responsiveness.
 
 **Let's get practicing!** 🎶
