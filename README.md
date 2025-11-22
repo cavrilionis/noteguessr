@@ -2,6 +2,12 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) 
 [![ShinyApps.io](https://img.shields.io/badge/shinyapps.io-deployed-brightgreen.svg)](https://christos.shinyapps.io/noteguessr/)
+[![Deploy Status](https://img.shields.io/badge/Render-Deployed-0099cc?style=flat&logo=render)](https://noteguessr.onrender.com)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
+![R](https://img.shields.io/badge/Language-R-276DC3?style=flat&logo=r)
+![Shiny](https://img.shields.io/badge/Framework-Shiny-7F7FFF?style=flat&logo=Rstudio)
+![Docker](https://img.shields.io/badge/Container-Docker-2496ED?style=flat&logo=docker)
+![Code Style](https://img.shields.io/badge/code%20style-tidyverse-7E234D.svg)
 
 This repository contains the code for the [NoteGuessR](https://christos.shinyapps.io/noteguessr/) web application, a tool designed to help musicians practice note recognition in the bass clef.
 
